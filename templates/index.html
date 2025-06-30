@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Spam Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f5;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            margin: auto;
+            width: 500px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px #aaa;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        img {
+            width: 500px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="{{ url_for('static', filename='email_spam.png') }}" alt="Email Icon">
+    <h2>Email Spam Detector</h2>
+    <form method="POST">
+        <textarea name="email" placeholder="Type your email here...">{{ email if email else '' }}</textarea><br>
+        <button type="submit">Check</button>
+    </form>
+    <div id="result">
+        {% if prediction is not none %}
+            {% if prediction == 1 %}
+                <span style="color: red;">🚫 This email is <strong>SPAM</strong></span>
+            {% else %}
+                <span style="color: green;">✅ This email is <strong>NOT SPAM</strong></span>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
